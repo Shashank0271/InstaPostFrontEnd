@@ -9,8 +9,9 @@ class StartupView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<StartupViewModel>.reactive(
-      builder: (context, model, child) =>
-          const Center(child: CircularProgressIndicator()),
+      builder: (context, model, child) => const Scaffold(
+          backgroundColor: Colors.white,
+          body: Center(child: CircularProgressIndicator())),
       viewModelBuilder: () => StartupViewModel(),
       onViewModelReady: (model) => SchedulerBinding.instance
           .addPostFrameCallback((_) => model.initialise()),

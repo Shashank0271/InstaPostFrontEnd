@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-class User {
+class UserModel {
   final String username;
   final String email;
   final String firebaseUid;
@@ -11,7 +11,7 @@ class User {
   final List<String> postIds;
   final List<String> followersTokens;
   final List<String> following;
-  User({
+  UserModel({
     required this.username,
     required this.email,
     required this.firebaseUid,
@@ -20,8 +20,9 @@ class User {
     required this.followersTokens,
     required this.following,
   });
+  
 
-  User copyWith({
+  UserModel copyWith({
     String? username,
     String? email,
     String? firebaseUid,
@@ -30,7 +31,7 @@ class User {
     List<String>? followersTokens,
     List<String>? following,
   }) {
-    return User(
+    return UserModel(
       username: username ?? this.username,
       email: email ?? this.email,
       firebaseUid: firebaseUid ?? this.firebaseUid,
@@ -53,40 +54,38 @@ class User {
     };
   }
 
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
-        username: map['username'] as String,
-        email: map['email'] as String,
-        firebaseUid: map['firebaseUid'] as String,
-        registrationToken: map['registrationToken'] as String,
-        postIds: List<String>.from((map['postIds'] as List<String>)),
-        followersTokens:
-            List<String>.from((map['followersTokens'] as List<String>)),
-        following: List<String>.from(
-          (map['following'] as List<String>),
-        ));
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
+      username: map['username'] as String,
+      email: map['email'] as String,
+      firebaseUid: map['firebaseUid'] as String,
+      registrationToken: map['registrationToken'] as String,
+      postIds: List<String>.from((map['postIds'] as List<String>)),
+      followersTokens: List<String>.from((map['followersTokens'] as List<String>)),
+      following: List<String>.from((map['following'] as List<String>),
+    ));
   }
 
   String toJson() => json.encode(toMap());
 
-  factory User.fromJson(String source) =>
-      User.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserModel.fromJson(String source) => UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'User(username: $username, email: $email, firebaseUid: $firebaseUid, registrationToken: $registrationToken, postIds: $postIds, followersTokens: $followersTokens, following: $following)';
+    return 'UserModel(username: $username, email: $email, firebaseUid: $firebaseUid, registrationToken: $registrationToken, postIds: $postIds, followersTokens: $followersTokens, following: $following)';
   }
 
   @override
-  bool operator ==(covariant User other) {
+  bool operator ==(covariant UserModel other) {
     if (identical(this, other)) return true;
-
-    return other.username == username &&
-        other.email == email &&
-        other.firebaseUid == firebaseUid &&
-        other.registrationToken == registrationToken &&
-        listEquals(other.postIds, postIds) &&
-        listEquals(other.followersTokens, followersTokens) &&
-        listEquals(other.following, following);
+  
+    return 
+      other.username == username &&
+      other.email == email &&
+      other.firebaseUid == firebaseUid &&
+      other.registrationToken == registrationToken &&
+      listEquals(other.postIds, postIds) &&
+      listEquals(other.followersTokens, followersTokens) &&
+      listEquals(other.following, following);
   }
 }

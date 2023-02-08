@@ -1,6 +1,7 @@
 import 'package:insta_post/services/dio_service.dart';
 import 'package:insta_post/ui/home/home_view.dart';
 import 'package:insta_post/ui/registration/registration_view.dart';
+import 'package:insta_post/ui/sign-up/signup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../services/authentication_service.dart';
@@ -13,6 +14,7 @@ import '../ui/startup/startup_view.dart';
     MaterialRoute(page: LoginView),
     MaterialRoute(page: RegistrationView),
     MaterialRoute(page: HomeView),
+    MaterialRoute(page: SignupView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

@@ -1,9 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:insta_post/app/app.locator.dart';
 import 'package:insta_post/app/app.router.dart';
+import 'package:insta_post/ui/shared/setup_snackbar_ui.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await setupLocator();
+  setupSnackbarUi();
   runApp(MyApp());
 }
 
@@ -16,10 +24,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.orange,
+          textTheme: TextTheme(
+              displaySmall: GoogleFonts.playfairDisplay(
+                fontSize: 16,
+              ),
+              headlineLarge: GoogleFonts.alice(
+                fontSize: 64,
+              ))),
       navigatorKey: StackedService.navigatorKey,
       onGenerateRoute: StackedRouter().onGenerateRoute,
     );
   }
 }
+//flutter run --no-sound-null-safety

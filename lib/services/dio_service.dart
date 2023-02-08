@@ -8,11 +8,11 @@ class DioService {
   DioService() {
     dio.options.baseUrl = 'http://192.168.144.50:4000/api/v1/';
   }
-  Future<User> getUser(String firebaseUid) async {
+  Future<UserModel> getUser(String firebaseUid) async {
     try {
       Map<String, dynamic> response =
           await dio.get('users/$firebaseUid') as Map<String, dynamic>;
-      return User.fromMap(response);
+      return UserModel.fromMap(response);
     } on DioError catch (e) {
       logger.e(e.message);
       logger.e(e.response!.statusCode);

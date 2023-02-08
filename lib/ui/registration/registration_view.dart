@@ -9,7 +9,9 @@ class RegistrationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<RegistrationViewModel>.reactive(
       builder: (context, model, child) => const Scaffold(
-        body: Center(child: Text('registration screen')),
+        body: Center(
+          child: Text('registration screen'),
+        ),
       ),
       viewModelBuilder: () => RegistrationViewModel(),
     );
