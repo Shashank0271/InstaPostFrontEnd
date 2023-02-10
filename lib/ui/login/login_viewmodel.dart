@@ -37,7 +37,7 @@ class LoginViewModel extends BaseViewModel {
         await _authenticationService.loginUser(
             email: email, password: password);
         log.v(_authenticationService.isUserSignedIn);
-        // await _userService.syncUserAccount();
+        await _userService.syncUserAccount();
         _navigationService.clearStackAndShow(Routes.homeView);
 
         setBusy(false);

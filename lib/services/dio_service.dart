@@ -24,9 +24,12 @@ class DioService {
 
   Future<UserModel> getUser({required String firebaseUid}) async {
     try {
-      Map<String, dynamic> response =
-          await dio.get('users/$firebaseUid') as Map<String, dynamic>;
-      return UserModel.fromMap(response);
+      final Response response = await dio.get('users/$firebaseUid');
+      print(response.data['postIds'].runtimeType);
+      Map<String, dynamic> responseJson =
+          Map<String, dynamic>.from(response.data);
+      print(responseJson.runtimeType); //List<dynamic> ERROR !
+      return UserModel.fromMap(responseJson);
     } on DioError catch (e) {
       logger.e(e.message);
       logger.e(e.response!.statusCode);

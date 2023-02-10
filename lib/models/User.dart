@@ -20,7 +20,6 @@ class UserModel {
     required this.followersTokens,
     required this.following,
   });
-  
 
   UserModel copyWith({
     String? username,
@@ -53,6 +52,7 @@ class UserModel {
       'following': following,
     };
   }
+//categories = (map['categories'] as List)?.map((item) => item as String)?.toList();
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
@@ -60,15 +60,17 @@ class UserModel {
       email: map['email'] as String,
       firebaseUid: map['firebaseUid'] as String,
       registrationToken: map['registrationToken'] as String,
-      postIds: List<String>.from((map['postIds'] as List<String>)),
-      followersTokens: List<String>.from((map['followersTokens'] as List<String>)),
-      following: List<String>.from((map['following'] as List<String>),
-    ));
+      postIds: (map['postIds'] as List).map((e) => e as String).toList(),
+      followersTokens:
+          (map['followersTokens'] as List).map((e) => e as String).toList(),
+      following: (map['following'] as List).map((e) => e as String).toList(),
+    );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory UserModel.fromJson(String source) => UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserModel.fromJson(String source) =>
+      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -78,14 +80,13 @@ class UserModel {
   @override
   bool operator ==(covariant UserModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.username == username &&
-      other.email == email &&
-      other.firebaseUid == firebaseUid &&
-      other.registrationToken == registrationToken &&
-      listEquals(other.postIds, postIds) &&
-      listEquals(other.followersTokens, followersTokens) &&
-      listEquals(other.following, following);
+
+    return other.username == username &&
+        other.email == email &&
+        other.firebaseUid == firebaseUid &&
+        other.registrationToken == registrationToken &&
+        listEquals(other.postIds, postIds) &&
+        listEquals(other.followersTokens, followersTokens) &&
+        listEquals(other.following, following);
   }
 }
