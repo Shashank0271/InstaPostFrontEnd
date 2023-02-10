@@ -24,7 +24,6 @@ class LoginViewModel extends BaseViewModel {
   }
 
   Future loginUser() async {
-    // await _authenticationService.logout();
 
     String email = emailController.text.trim().toString();
     String password = passwordController.text.trim().toString();
@@ -34,10 +33,12 @@ class LoginViewModel extends BaseViewModel {
     } else {
       try {
         setBusy(true);
+
         await _authenticationService.loginUser(
             email: email, password: password);
-        log.v(_authenticationService.isUserSignedIn);
+
         await _userService.syncUserAccount();
+
         _navigationService.clearStackAndShow(Routes.homeView);
 
         setBusy(false);
