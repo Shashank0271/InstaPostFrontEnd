@@ -24,6 +24,7 @@ class SignupViewModel extends BaseViewModel {
     final email = emailController.text.trim().toString();
     final password = passwordController.text.trim().toString();
     final userName = usernameController.text.trim().toString();
+    
     if (email.isEmpty || password.isEmpty || userName.isEmpty) {
       _snackbarService.showSnackbar(message: 'please fill in all details');
     } else {

@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:insta_post/app/app.logger.dart';
 import 'package:insta_post/models/User.dart';
+
+import '../models/Post.dart';
 
 class DioService {
   Dio dio = Dio();
@@ -37,4 +40,71 @@ class DioService {
       rethrow;
     }
   }
+
+  Future<void> addPost(
+      {required XFile postImage,
+      required String title,
+      required String body,
+      required String category,
+      required String userFirebaseId,
+      required String userName}) async {
+    final testPost = FormData.fromMap({
+      "title": title,
+      "body": body,
+      "userFirebaseId": userFirebaseId,
+      "userName": userName,
+      "category": category,
+      "photo": await MultipartFile.fromFile(postImage.path),
+    });
+    try {
+      await dio.post('posts', data: testPost);
+    } on DioError catch (e) {
+      logger.e(e.response);
+      logger.e(e.message);
+      rethrow;
+    } catch (e) {
+      logger.e(e.toString());
+      rethrow;
+    }
+  }
+
+  Future<void> getAllPosts() async {
+    try {
+      final Response response = await dio.get('posts');
+      logger.v("fetched all posts : ${response.data}");
+      List<Post> allPosts =
+          (response.data as List).map((e) => Post.fromMap(e)).toList();
+      //return allPosts
+    } on DioError catch (e) {
+      logger.e(e.response);
+      logger.e(e.message);
+      rethrow;
+    } catch (e) {
+      logger.e(e.toString());
+      rethrow;
+    }
+  }
+
+  Future<void> getCurrentUsersPosts() async {}
+
+  /*
+    Future<void> updateUser(
+      {XFile? image, String? purpose, required String idToken}) async {
+    var formData = FormData.fromMap({
+      "purpose": purpose,
+      "image": image == null ? null : await MultipartFile.fromFile(image.path),
+    });
+    dio.options.headers['Authorization'] = "Bearer $idToken";
+    try {
+      await dio.put('/users/update-user', data: formData);
+    } on DioError catch (e) {
+      log.e(e.message);
+      log.e(e.response);
+      rethrow;
+    } catch (e) {
+      log.e(e.toString());
+      rethrow;
+    }
+  }
+  */
 }

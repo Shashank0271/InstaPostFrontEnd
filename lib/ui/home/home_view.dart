@@ -9,8 +9,18 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        body: Center(
-            child: TextButton(onPressed: model.logout, child: Text('logout'))),
+        body: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TextButton(onPressed: model.logout, child: Text('logout')),
+            TextButton(
+              onPressed: model.testApi,
+              child: Text('POST'),
+            )
+          ],
+        ),
       ),
       viewModelBuilder: () => HomeViewModel(),
     );

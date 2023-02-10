@@ -37,8 +37,9 @@ class UserService {
 
   Future<void> syncOrCreateUserAccount({required UserModel user}) async {
     log.i('user:$user');
-    log.d(_currentUser == null);
+
     await syncUserAccount();
+
     if (_currentUser == null) {
       log.v('We have no user account. Create a new user ...');
 
@@ -48,9 +49,6 @@ class UserService {
       _currentUser = user;
 
       log.v('_currentUser has been saved');
-    } else {
-      log.d("current user is not null");
-      log.d(_currentUser);
-    }
+    } 
   }
 }

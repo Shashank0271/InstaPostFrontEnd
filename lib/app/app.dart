@@ -1,4 +1,5 @@
 import 'package:insta_post/services/dio_service.dart';
+import 'package:insta_post/services/image_service.dart';
 import 'package:insta_post/ui/home/home_view.dart';
 import 'package:insta_post/ui/sign-up/signup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -22,6 +23,7 @@ import '../ui/startup/startup_view.dart';
     LazySingleton(classType: DialogService),
     LazySingleton(classType: DioService),
     LazySingleton(classType: UserService),
+    LazySingleton(classType: ImageService),
     Singleton(classType: AuthenticationService),
   ],
   logger: StackedLogger(),

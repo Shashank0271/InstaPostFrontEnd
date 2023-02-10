@@ -14,6 +14,7 @@ import 'package:stacked_services/src/snackbar/snackbar_service.dart';
 
 import '../services/authentication_service.dart';
 import '../services/dio_service.dart';
+import '../services/image_service.dart';
 import '../services/user_service.dart';
 
 final locator = StackedLocator.instance;
@@ -31,5 +32,6 @@ Future<void> setupLocator(
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => DioService());
   locator.registerLazySingleton(() => UserService());
+  locator.registerLazySingleton(() => ImageService());
   locator.registerSingleton(AuthenticationService());
 }
