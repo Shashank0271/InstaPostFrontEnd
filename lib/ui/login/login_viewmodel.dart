@@ -5,11 +5,14 @@ import 'package:insta_post/services/authentication_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../services/user_service.dart';
+
 class LoginViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
   final _snackbarService = locator<SnackbarService>();
-  final _dialogService = locator<DialogService>();
+  final _userService = locator<UserService>();
+  
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -22,13 +25,21 @@ class LoginViewModel extends BaseViewModel {
     String password = emailController.text.trim().toString();
     if (email.isEmpty || password.isEmpty) {
       _snackbarService.showSnackbar(
-          title: 'title', message: 'please enter all the details');
-      _dialogService.showDialog(title: 'asdasd');
+          title: 'incomplete details', message: 'please enter all the details');
     } else {
-      setBusy(true);
-      await _authenticationService.loginUser(
-          email: emailController.text.trim());
-      setBusy(false);
+      try {
+        setBusy(true);
+        await _authenticationService
+            .loginUser(email: email, password: password)
+            .then((value) async {
+          await _userService.syncUserAccount();
+          _navigationService.clearStackAndShow(Routes.homeView);
+        });
+        setBusy(false);
+      } catch (e) {
+        setBusy(false);
+        _snackbarService.showSnackbar(message: e.toString());
+      }
     }
   }
 }

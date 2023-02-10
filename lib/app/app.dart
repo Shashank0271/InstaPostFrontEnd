@@ -1,10 +1,10 @@
 import 'package:insta_post/services/dio_service.dart';
 import 'package:insta_post/ui/home/home_view.dart';
-import 'package:insta_post/ui/registration/registration_view.dart';
 import 'package:insta_post/ui/sign-up/signup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../services/authentication_service.dart';
+import '../services/user_service.dart';
 import '../ui/login/login_view.dart';
 import '../ui/startup/startup_view.dart';
 
@@ -12,7 +12,6 @@ import '../ui/startup/startup_view.dart';
   routes: [
     MaterialRoute(page: StartupView, initial: true),
     MaterialRoute(page: LoginView),
-    MaterialRoute(page: RegistrationView),
     MaterialRoute(page: HomeView),
     MaterialRoute(page: SignupView),
   ],
@@ -21,8 +20,9 @@ import '../ui/startup/startup_view.dart';
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: SnackbarService),
     LazySingleton(classType: DialogService),
-    Singleton(classType: AuthenticationService),
     LazySingleton(classType: DioService),
+    LazySingleton(classType: UserService),
+    Singleton(classType: AuthenticationService),
   ],
   logger: StackedLogger(),
 )

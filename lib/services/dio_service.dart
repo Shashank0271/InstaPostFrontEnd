@@ -6,9 +6,23 @@ class DioService {
   Dio dio = Dio();
   final logger = getLogger('DioService');
   DioService() {
-    dio.options.baseUrl = 'http://192.168.144.50:4000/api/v1/';
+    dio.options.baseUrl = 'http://10.20.23.215:4000/api/v1/';
   }
-  Future<UserModel> getUser(String firebaseUid) async {
+
+  Future<void> createUser({required user}) async {
+    try {
+      var formData = FormData.fromMap(user.toMap());
+      logger.i("Sending request");
+      Response response = await dio.post('users', data: formData);
+      logger.d(response.data);
+    } on DioError catch (e) {
+      logger.e(e.response);
+      logger.e(e.message);
+      rethrow;
+    }
+  }
+
+  Future<UserModel> getUser({required String firebaseUid}) async {
     try {
       Map<String, dynamic> response =
           await dio.get('users/$firebaseUid') as Map<String, dynamic>;

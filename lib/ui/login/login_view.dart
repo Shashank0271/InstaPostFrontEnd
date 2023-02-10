@@ -11,6 +11,7 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Padding(
           padding: const EdgeInsets.only(left: 40, top: 128, right: 24),
           child: Column(

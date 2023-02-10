@@ -31,6 +31,8 @@ class MyApp extends StatelessWidget {
               ),
               headlineLarge: GoogleFonts.alice(
                 fontSize: 64,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ))),
       navigatorKey: StackedService.navigatorKey,
       onGenerateRoute: StackedRouter().onGenerateRoute,

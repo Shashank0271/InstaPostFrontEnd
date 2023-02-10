@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 class UserModel {
   final String username;
   final String email;
-  final String firebaseUid;
+  String firebaseUid;
   final String registrationToken;
   final List<String> postIds;
   final List<String> followersTokens;
