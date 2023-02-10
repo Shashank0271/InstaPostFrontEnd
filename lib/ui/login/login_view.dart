@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:insta_post/ui/shared/ui_helper.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 import 'package:stacked/stacked.dart';
 import 'login_viewmodel.dart';
 
@@ -26,7 +25,7 @@ class LoginView extends StatelessWidget {
                 verticalSpaceMassive,
                 TextField(
                   controller: model.emailController,
-                  obscureText: true,
+                  textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
                     hintText: 'email',
                   ),
@@ -34,7 +33,7 @@ class LoginView extends StatelessWidget {
                 verticalSpaceLarge,
                 TextField(
                   controller: model.passwordController,
-                  obscureText: true,
+                  // obscureText: true,
                   decoration: const InputDecoration(
                     hintText: 'password',
                   ),

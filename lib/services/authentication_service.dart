@@ -4,33 +4,34 @@ import 'package:insta_post/app/app.logger.dart';
 class AuthenticationService {
   final logger = getLogger('AuthenticationServie');
   final _firebaseAuth = FirebaseAuth.instance;
-  late User firebaseUser;
+  User? firebaseUser;
   bool isUserSignedIn = false;
 
   AuthenticationService() {
     _firebaseAuth.authStateChanges().listen((User? user) async {
       if (user == null) {
-        logger.v('user is logged out');
+        isUserSignedIn = false;
+        logger.v("user is currently signed out !");
       } else {
-        logger.v('user is logged in');
         isUserSignedIn = true;
         firebaseUser = user;
+        logger.v("user is currently signed in !");
       }
     });
   }
 
   Future loginUser({required String email, required String password}) async {
+    logger.d("entered login user method");
     try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         logger.e('The password provided is too weak.');
-        rethrow;
       } else if (e.code == 'email-already-in-use') {
         logger.e('The account already exists for that email.');
-        rethrow;
       }
+      rethrow;
     } catch (e) {
       logger.e(e.toString());
       rethrow;
@@ -60,5 +61,4 @@ class AuthenticationService {
   Future<void> logout() async {
     await _firebaseAuth.signOut();
   }
-
 }

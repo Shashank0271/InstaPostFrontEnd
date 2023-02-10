@@ -9,10 +9,16 @@ class UserService {
   final _authenticationService = locator<AuthenticationService>();
   final _dioService = locator<DioService>();
   UserModel? _currentUser;
+
+  UserModel? get currentUser => _currentUser;
+
   final log = getLogger('UserService');
 
   Future<void> syncUserAccount() async {
-    final firebaseUserId = _authenticationService.firebaseUser.uid;
+    log.d("entered sync user method");
+
+    final firebaseUserId = _authenticationService.firebaseUser!.uid;
+
     log.v('Sync user $firebaseUserId');
     try {
       final userAccount =
@@ -22,18 +28,22 @@ class UserService {
     } catch (e) {
       log.v('User does not exist in database .');
     }
+    return;
   }
 
   Future<void> syncOrCreateUserAccount({required UserModel user}) async {
     log.i('user:$user');
+    log.d(_currentUser == null);
     await syncUserAccount();
     if (_currentUser == null) {
       log.v('We have no user account. Create a new user ...');
-      user.firebaseUid = _authenticationService.firebaseUser.uid;
+      user.firebaseUid = _authenticationService.firebaseUser!.uid;
       await _dioService.createUser(user: user);
       _currentUser = user;
       log.v('_currentUser has been saved');
+    } else {
+      log.d("current user is not null");
+      log.d(_currentUser);
     }
   }
-
 }

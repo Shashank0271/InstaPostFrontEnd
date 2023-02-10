@@ -27,28 +27,28 @@ class SignupViewModel extends BaseViewModel {
     if (email.isEmpty || password.isEmpty || userName.isEmpty) {
       _snackbarService.showSnackbar(message: 'please fill in all details');
     } else {
-      try {
-        setBusy(true);
-        await _authenticationService
-            .signUpUser(email: email, password: password, userName: userName)
-            .then((_) async {
-          final userAccount = UserModel(
-            username: userName,
-            email: email,
-            firebaseUid: '',
-            registrationToken: '',
-            followersTokens: [],
-            following: [],
-            postIds: [],
-          );
-          await _userService.syncOrCreateUserAccount(user: userAccount);
-          _navigationService.clearStackAndShow(Routes.homeView);
-        });
-        setBusy(false);
-      } catch (e) {
-        setBusy(false);
-        _snackbarService.showSnackbar(message: e.toString());
-      }
+    try {
+      setBusy(true);
+      await _authenticationService.signUpUser(
+          email: "ssingh0271@gmail.com",
+          password: "shashank",
+          userName: "shashank");
+      final userAccount = UserModel(
+        username: userName,
+        email: email,
+        firebaseUid: '',
+        registrationToken: '',
+        followersTokens: [],
+        following: [],
+        postIds: [],
+      );
+      await _userService.syncOrCreateUserAccount(user: userAccount);
+      _navigationService.clearStackAndShow(Routes.homeView);
+      setBusy(false);
+    } catch (e) {
+      setBusy(false);
+      _snackbarService.showSnackbar(message: e.toString());
     }
+  }
   }
 }
