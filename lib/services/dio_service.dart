@@ -22,6 +22,9 @@ class DioService {
       logger.e(e.response);
       logger.e(e.message);
       rethrow;
+    } catch (e) {
+      logger.e(e.toString());
+      rethrow;
     }
   }
 
@@ -68,13 +71,14 @@ class DioService {
     }
   }
 
-  Future<void> getAllPosts() async {
+  Future<List<Post>> getAllPosts() async {
+    //TODO : integrate with home-screen
     try {
       final Response response = await dio.get('posts');
       logger.v("fetched all posts : ${response.data}");
       List<Post> allPosts =
           (response.data as List).map((e) => Post.fromMap(e)).toList();
-      //return allPosts
+      return allPosts;
     } on DioError catch (e) {
       logger.e(e.response);
       logger.e(e.message);
@@ -86,25 +90,4 @@ class DioService {
   }
 
   Future<void> getCurrentUsersPosts() async {}
-
-  /*
-    Future<void> updateUser(
-      {XFile? image, String? purpose, required String idToken}) async {
-    var formData = FormData.fromMap({
-      "purpose": purpose,
-      "image": image == null ? null : await MultipartFile.fromFile(image.path),
-    });
-    dio.options.headers['Authorization'] = "Bearer $idToken";
-    try {
-      await dio.put('/users/update-user', data: formData);
-    } on DioError catch (e) {
-      log.e(e.message);
-      log.e(e.response);
-      rethrow;
-    } catch (e) {
-      log.e(e.toString());
-      rethrow;
-    }
-  }
-  */
 }

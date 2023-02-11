@@ -23,11 +23,8 @@ class UserService {
     try {
       final userAccount =
           await _dioService.getUser(firebaseUid: firebaseUserId);
-
       log.v('User account exists. Save as _currentUser');
-
       _currentUser = userAccount;
-      
       log.d(_currentUser);
     } catch (e) {
       log.v('User does not exist in database .');
@@ -42,7 +39,6 @@ class UserService {
 
     if (_currentUser == null) {
       log.v('We have no user account. Create a new user ...');
-
       user.firebaseUid = _authenticationService.firebaseUser!.uid;
 
       await _dioService.createUser(user: user);

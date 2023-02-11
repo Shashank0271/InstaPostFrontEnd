@@ -6,18 +6,22 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../app/app.router.dart';
 
 import '../../app/app.locator.dart';
+import '../../models/Post.dart';
 
-class HomeViewModel extends BaseViewModel {
+class HomeViewModel extends FutureViewModel {
   final _authenticationService = locator<AuthenticationService>();
   final _dioService = locator<DioService>();
   final _nav = locator<NavigationService>();
-  final _imageService = locator<ImageService>();
+   List<Post> _allposts = [];
+  List<Post> get allPosts => _allposts;
+  // final _imageService = locator<ImageService>();
   Future logout() async {
     await _authenticationService.logout();
     _nav.clearStackAndShow(Routes.loginView);
   }
 
-  Future testApi() async {
-    await _dioService.getAllPosts();
+  @override
+  Future futureToRun() async {
+    _allposts = await _dioService.getAllPosts();
   }
 }
