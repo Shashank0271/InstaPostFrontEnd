@@ -24,18 +24,20 @@ class SignupViewModel extends BaseViewModel {
     final email = emailController.text.trim().toString();
     final password = passwordController.text.trim().toString();
     final userName = usernameController.text.trim().toString();
-    
+
     if (email.isEmpty || password.isEmpty || userName.isEmpty) {
       _snackbarService.showSnackbar(message: 'please fill in all details');
     } else {
       try {
         setBusy(true);
         await _authenticationService.signUpUser(
-            email: email, password: password, userName: userName);
+          email: email,
+          password: password,
+        );
         final userAccount = UserModel(
           username: userName,
           email: email,
-          firebaseUid: '',
+          firebaseUid: _authenticationService.firebaseUser!.uid,
           registrationToken: '',
           followersTokens: [],
           following: [],

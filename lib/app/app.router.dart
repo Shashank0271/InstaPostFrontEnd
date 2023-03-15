@@ -8,10 +8,11 @@
 import 'package:flutter/material.dart';
 import 'package:insta_post/ui/home/home_view.dart' as _i4;
 import 'package:insta_post/ui/login/login_view.dart' as _i3;
+import 'package:insta_post/ui/postsdetails/postdetails_view.dart' as _i6;
 import 'package:insta_post/ui/sign-up/signup_view.dart' as _i5;
 import 'package:insta_post/ui/startup/startup_view.dart' as _i2;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i6;
+import 'package:stacked_services/stacked_services.dart' as _i7;
 
 class Routes {
   static const startupView = '/';
@@ -22,11 +23,14 @@ class Routes {
 
   static const signupView = '/signup-view';
 
+  static const postDetailsView = '/post-details-view';
+
   static const all = <String>{
     startupView,
     loginView,
     homeView,
     signupView,
+    postDetailsView,
   };
 }
 
@@ -47,6 +51,10 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.signupView,
       page: _i5.SignupView,
+    ),
+    _i1.RouteDef(
+      Routes.postDetailsView,
+      page: _i6.PostDetailsView,
     ),
   ];
 
@@ -75,6 +83,13 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+    _i6.PostDetailsView: (data) {
+      final args = data.getArgs<PostDetailsViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => _i6.PostDetailsView(args.currentPost),
+        settings: data,
+      );
+    },
   };
 
   @override
@@ -83,7 +98,13 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i6.NavigationService {
+class PostDetailsViewArguments {
+  const PostDetailsViewArguments({required this.currentPost});
+
+  final dynamic currentPost;
+}
+
+extension NavigatorStateExtension on _i7.NavigationService {
   Future<dynamic> navigateToStartupView([
     int? routerId,
     bool preventDuplicates = true,
@@ -140,6 +161,22 @@ extension NavigatorStateExtension on _i6.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToPostDetailsView({
+    required dynamic currentPost,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.postDetailsView,
+        arguments: PostDetailsViewArguments(currentPost: currentPost),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithStartupView([
     int? routerId,
     bool preventDuplicates = true,
@@ -190,6 +227,22 @@ extension NavigatorStateExtension on _i6.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.signupView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithPostDetailsView({
+    required dynamic currentPost,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.postDetailsView,
+        arguments: PostDetailsViewArguments(currentPost: currentPost),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

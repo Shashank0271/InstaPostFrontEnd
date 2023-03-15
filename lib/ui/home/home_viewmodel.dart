@@ -1,6 +1,5 @@
 import 'package:insta_post/services/authentication_service.dart';
 import 'package:insta_post/services/dio_service.dart';
-import 'package:insta_post/services/image_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../app/app.router.dart';

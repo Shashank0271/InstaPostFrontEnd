@@ -9,7 +9,7 @@ class DioService {
   Dio dio = Dio();
   final logger = getLogger('DioService');
   DioService() {
-    dio.options.baseUrl = 'http://10.20.23.215:4000/api/v1/';
+    dio.options.baseUrl = 'http://10.20.25.222:4000/api/v1/';
   }
 
   Future<void> createUser({required user}) async {
@@ -72,7 +72,6 @@ class DioService {
   }
 
   Future<List<Post>> getAllPosts() async {
-    //TODO : integrate with home-screen
     try {
       final Response response = await dio.get('posts');
       logger.v("fetched all posts : ${response.data}");

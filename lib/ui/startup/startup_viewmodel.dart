@@ -11,6 +11,7 @@ class StartupViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
   final log = getLogger('StartupViewModel');
+
   initialise() async{
     if (_authenticationService.isUserSignedIn) {
       log.v('syncing user from db');
@@ -20,4 +21,5 @@ class StartupViewModel extends BaseViewModel {
       _navigationService.navigateTo(Routes.loginView);
     }
   }
+  
 }
