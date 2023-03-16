@@ -18,10 +18,15 @@ class PostDetailsView extends StatelessWidget {
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(16)),
-                child: Image.network(
-                  currentPost.imageUrl,
+              SizedBox(
+                height: screenHeightPercentage(context, percentage: 0.35),
+                width: screenWidth(context),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  child: Image.network(
+                    currentPost.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               verticalSpaceSmall,
@@ -31,9 +36,8 @@ class PostDetailsView extends StatelessWidget {
                   onTap: () {
                     //we add this user to the currentPost.users followers
                     //we add the currentPost.user to this users following list
-                    //this should happen after viewing the posts authers profile , 
+                    //this should happen after viewing the posts authers profile ,
                     //but now done directly for testing purposes
-
                   },
                   child: Container(
                     padding: const EdgeInsets.all(8),
