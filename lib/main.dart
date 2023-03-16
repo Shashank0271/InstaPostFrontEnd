@@ -6,6 +6,7 @@ import 'package:insta_post/app/app.router.dart';
 import 'package:insta_post/ui/shared/setup_snackbar_ui.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

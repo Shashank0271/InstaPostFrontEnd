@@ -40,6 +40,7 @@ class SignupViewModel extends BaseViewModel {
           firebaseUid: _authenticationService.firebaseUser!.uid,
           registrationToken: '',
           followersTokens: [],
+          followers: [],
           following: [],
           postIds: [],
         );

@@ -10,6 +10,7 @@ class UserModel {
   final String registrationToken;
   final List<String> postIds;
   final List<String> followersTokens;
+  final List<String> followers;
   final List<String> following;
   UserModel({
     required this.username,
@@ -18,6 +19,7 @@ class UserModel {
     required this.registrationToken,
     required this.postIds,
     required this.followersTokens,
+    required this.followers,
     required this.following,
   });
 
@@ -28,6 +30,7 @@ class UserModel {
     String? registrationToken,
     List<String>? postIds,
     List<String>? followersTokens,
+    List<String>? followers,
     List<String>? following,
   }) {
     return UserModel(
@@ -37,6 +40,7 @@ class UserModel {
       registrationToken: registrationToken ?? this.registrationToken,
       postIds: postIds ?? this.postIds,
       followersTokens: followersTokens ?? this.followersTokens,
+      followers: followers ?? this.followers,
       following: following ?? this.following,
     );
   }
@@ -49,10 +53,10 @@ class UserModel {
       'registrationToken': registrationToken,
       'postIds': postIds,
       'followersTokens': followersTokens,
+      'followers': followers,
       'following': following,
     };
   }
-//categories = (map['categories'] as List)?.map((item) => item as String)?.toList();
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
@@ -64,6 +68,7 @@ class UserModel {
       followersTokens:
           (map['followersTokens'] as List).map((e) => e as String).toList(),
       following: (map['following'] as List).map((e) => e as String).toList(),
+      followers: (map['followers'] as List).map((e) => e as String).toList(),
     );
   }
 
@@ -74,7 +79,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(username: $username, email: $email, firebaseUid: $firebaseUid, registrationToken: $registrationToken, postIds: $postIds, followersTokens: $followersTokens, following: $following)';
+    return 'UserModel(username: $username, email: $email, firebaseUid: $firebaseUid, registrationToken: $registrationToken, postIds: $postIds, followersTokens: $followersTokens, followers: $followers, following: $following)';
   }
 
   @override
@@ -87,6 +92,7 @@ class UserModel {
         other.registrationToken == registrationToken &&
         listEquals(other.postIds, postIds) &&
         listEquals(other.followersTokens, followersTokens) &&
+        listEquals(other.followers, followers) &&
         listEquals(other.following, following);
   }
 }

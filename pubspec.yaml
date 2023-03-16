@@ -50,6 +50,9 @@ dependencies:
   google_fonts: ^3.0.1
   loader_overlay: ^2.1.0
   image_picker: ^0.8.6+1
+  dropdown_textfield: ^1.0.8
+  stacked_hooks: ^0.2.3
+  liquid_pull_to_refresh: ^3.0.1
 
 dev_dependencies:
   flutter_test:

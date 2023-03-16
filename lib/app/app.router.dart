@@ -6,13 +6,15 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flutter/material.dart';
+import 'package:insta_post/models/Post.dart' as _i8;
+import 'package:insta_post/ui/create-posts/createpost_view.dart' as _i7;
 import 'package:insta_post/ui/home/home_view.dart' as _i4;
 import 'package:insta_post/ui/login/login_view.dart' as _i3;
 import 'package:insta_post/ui/postsdetails/postdetails_view.dart' as _i6;
 import 'package:insta_post/ui/sign-up/signup_view.dart' as _i5;
 import 'package:insta_post/ui/startup/startup_view.dart' as _i2;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i7;
+import 'package:stacked_services/stacked_services.dart' as _i9;
 
 class Routes {
   static const startupView = '/';
@@ -25,12 +27,15 @@ class Routes {
 
   static const postDetailsView = '/post-details-view';
 
+  static const createPostView = '/create-post-view';
+
   static const all = <String>{
     startupView,
     loginView,
     homeView,
     signupView,
     postDetailsView,
+    createPostView,
   };
 }
 
@@ -55,6 +60,10 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.postDetailsView,
       page: _i6.PostDetailsView,
+    ),
+    _i1.RouteDef(
+      Routes.createPostView,
+      page: _i7.CreatePostView,
     ),
   ];
 
@@ -90,6 +99,12 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+    _i7.CreatePostView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const _i7.CreatePostView(),
+        settings: data,
+      );
+    },
   };
 
   @override
@@ -101,10 +116,10 @@ class StackedRouter extends _i1.RouterBase {
 class PostDetailsViewArguments {
   const PostDetailsViewArguments({required this.currentPost});
 
-  final dynamic currentPost;
+  final _i8.Post currentPost;
 }
 
-extension NavigatorStateExtension on _i7.NavigationService {
+extension NavigatorStateExtension on _i9.NavigationService {
   Future<dynamic> navigateToStartupView([
     int? routerId,
     bool preventDuplicates = true,
@@ -162,7 +177,7 @@ extension NavigatorStateExtension on _i7.NavigationService {
   }
 
   Future<dynamic> navigateToPostDetailsView({
-    required dynamic currentPost,
+    required _i8.Post currentPost,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -171,6 +186,20 @@ extension NavigatorStateExtension on _i7.NavigationService {
   }) async {
     return navigateTo<dynamic>(Routes.postDetailsView,
         arguments: PostDetailsViewArguments(currentPost: currentPost),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToCreatePostView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.createPostView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -234,7 +263,7 @@ extension NavigatorStateExtension on _i7.NavigationService {
   }
 
   Future<dynamic> replaceWithPostDetailsView({
-    required dynamic currentPost,
+    required _i8.Post currentPost,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -243,6 +272,20 @@ extension NavigatorStateExtension on _i7.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.postDetailsView,
         arguments: PostDetailsViewArguments(currentPost: currentPost),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithCreatePostView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.createPostView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

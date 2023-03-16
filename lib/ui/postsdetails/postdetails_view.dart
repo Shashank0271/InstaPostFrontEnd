@@ -24,6 +24,26 @@ class PostDetailsView extends StatelessWidget {
                   currentPost.imageUrl,
                 ),
               ),
+              verticalSpaceSmall,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: GestureDetector(
+                  onTap: () {
+                    //we add this user to the currentPost.users followers
+                    //we add the currentPost.user to this users following list
+                    //this should happen after viewing the posts authers profile , 
+                    //but now done directly for testing purposes
+
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Colors.grey),
+                    child: Text(currentPost.userName),
+                  ),
+                ),
+              ),
               verticalSpaceMedium,
               const Divider(
                 color: Colors.grey,

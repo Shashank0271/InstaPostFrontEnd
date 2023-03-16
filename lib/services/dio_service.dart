@@ -44,7 +44,7 @@ class DioService {
     }
   }
 
-  Future<void> addPost(
+  Future<Post?> createPost(
       {required XFile postImage,
       required String title,
       required String body,
@@ -60,7 +60,10 @@ class DioService {
       "photo": await MultipartFile.fromFile(postImage.path),
     });
     try {
-      await dio.post('posts', data: testPost);
+      final response = await dio.post('posts', data: testPost);
+      Map<String, dynamic> responseJson =
+          Map<String, dynamic>.from(response.data);
+      return Post.fromMap(responseJson);
     } on DioError catch (e) {
       logger.e(e.response);
       logger.e(e.message);
@@ -88,5 +91,7 @@ class DioService {
     }
   }
 
+  Future<void> follow(
+      {required String currentUserFid, required String postUserFid}) async {}
   Future<void> getCurrentUsersPosts() async {}
 }

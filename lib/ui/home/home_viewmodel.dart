@@ -10,13 +10,23 @@ import '../../models/Post.dart';
 class HomeViewModel extends FutureViewModel {
   final _authenticationService = locator<AuthenticationService>();
   final _dioService = locator<DioService>();
-  final _nav = locator<NavigationService>();
-   List<Post> _allposts = [];
+  final _navigationService = locator<NavigationService>();
+
+  List<Post> _allposts = [];
   List<Post> get allPosts => _allposts;
   // final _imageService = locator<ImageService>();
   Future logout() async {
     await _authenticationService.logout();
-    _nav.clearStackAndShow(Routes.loginView);
+    _navigationService.clearStackAndShow(Routes.loginView);
+  }
+
+  navigateToCreatePostScreen() {
+    _navigationService.navigateTo(Routes.createPostView);
+  }
+
+  Future<void> refresh() async {
+    _allposts = await _dioService.getAllPosts();
+    notifyListeners();
   }
 
   @override
