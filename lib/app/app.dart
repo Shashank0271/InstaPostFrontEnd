@@ -10,6 +10,7 @@ import '../services/authentication_service.dart';
 import '../services/dynamic_link_service.dart';
 import '../services/user_service.dart';
 import '../ui/login/login_view.dart';
+import '../ui/profile/profile_view.dart';
 import '../ui/startup/startup_view.dart';
 
 @StackedApp(
@@ -20,6 +21,7 @@ import '../ui/startup/startup_view.dart';
     MaterialRoute(page: SignupView),
     MaterialRoute(page: PostDetailsView),
     MaterialRoute(page: CreatePostView),
+    MaterialRoute(page: ProfileView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

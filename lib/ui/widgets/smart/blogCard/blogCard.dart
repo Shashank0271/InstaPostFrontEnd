@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
-import '../../../models/Post.dart';
-import '../../shared/ui_helper.dart';
-import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../../models/Post.dart';
+import '../../../shared/ui_helper.dart';
 import 'blogCardmodel.dart';
 
 class BlogCard extends StatelessWidget {
@@ -44,6 +42,7 @@ class BlogCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       verticalSpaceSmall,
                       Text(currentPost.title),

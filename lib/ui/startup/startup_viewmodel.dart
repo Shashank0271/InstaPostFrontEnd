@@ -21,9 +21,9 @@ class StartupViewModel extends BaseViewModel {
     if (_authenticationService.isUserSignedIn) {
       log.v('syncing user from db');
       await _userService.syncUserAccount();
-      _navigationService.navigateTo(Routes.homeView);
+      _navigationService.clearStackAndShow(Routes.homeView);
     } else {
-      _navigationService.navigateTo(Routes.loginView);
+      _navigationService.clearStackAndShow(Routes.loginView);
     }
   }
 }

@@ -4,8 +4,8 @@ import 'package:share_plus/share_plus.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../../../app/app.locator.dart';
-import '../../../models/Post.dart';
+import '../../../../app/app.locator.dart';
+import '../../../../models/Post.dart';
 
 class BlogCardModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
