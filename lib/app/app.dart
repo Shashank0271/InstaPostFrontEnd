@@ -7,6 +7,7 @@ import 'package:insta_post/ui/sign-up/signup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../services/authentication_service.dart';
+import '../services/dynamic_link_service.dart';
 import '../services/user_service.dart';
 import '../ui/login/login_view.dart';
 import '../ui/startup/startup_view.dart';
@@ -29,6 +30,7 @@ import '../ui/startup/startup_view.dart';
     LazySingleton(classType: UserService),
     LazySingleton(classType: ImageService),
     Singleton(classType: AuthenticationService),
+    Singleton(classType: DynamicLinkService),
   ],
   logger: StackedLogger(),
 )

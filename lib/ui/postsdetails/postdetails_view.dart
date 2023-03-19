@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:insta_post/ui/postsdetails/postdetails_viewmodel.dart';
 import 'package:insta_post/ui/shared/ui_helper.dart';
 import 'package:stacked/stacked.dart';
-
 import '../../models/Post.dart';
 
 class PostDetailsView extends StatelessWidget {

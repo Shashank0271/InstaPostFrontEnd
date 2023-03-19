@@ -74,6 +74,23 @@ class DioService {
     }
   }
 
+  Future<Post?> getPost(String postid) async {
+    try {
+      logger.v('fetching post with postID = $postid');
+      final Response response = await dio.get('posts/fetchpost/$postid');
+      final requiredPost = Post.fromMap(response.data);
+      logger.d(requiredPost);
+      return requiredPost;
+    } on DioError catch (e) {
+      logger.e(e.message);
+      logger.e(e.response);
+      rethrow;
+    } catch (e) {
+      logger.e(e.toString());
+      rethrow;
+    }
+  }
+
   Future<List<Post>> getAllPosts() async {
     try {
       final Response response = await dio.get('posts');

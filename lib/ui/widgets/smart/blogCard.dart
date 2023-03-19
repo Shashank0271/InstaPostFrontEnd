@@ -8,7 +8,7 @@ import 'package:stacked/stacked.dart';
 import 'blogCardmodel.dart';
 
 class BlogCard extends StatelessWidget {
-  final currentPost;
+  final Post currentPost;
   const BlogCard(this.currentPost);
 
   @override
@@ -40,10 +40,24 @@ class BlogCard extends StatelessWidget {
                       image: NetworkImage(currentPost.imageUrl)),
                 ),
               ),
-              verticalSpaceSmall,
-              Text(currentPost.title),
-              verticalSpaceTiny,
-              Text(currentPost.userName),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      verticalSpaceSmall,
+                      Text(currentPost.title),
+                      verticalSpaceTiny,
+                      Text(currentPost.userName),
+                    ],
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        model.sharePost(currentPost.id);
+                      },
+                      icon: const Icon(Icons.share))
+                ],
+              )
             ]),
           ),
         ),

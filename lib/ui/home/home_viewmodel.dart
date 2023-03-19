@@ -1,9 +1,10 @@
+import 'dart:math';
+
 import 'package:insta_post/services/authentication_service.dart';
 import 'package:insta_post/services/dio_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../app/app.router.dart';
-
 import '../../app/app.locator.dart';
 import '../../models/Post.dart';
 
@@ -14,7 +15,7 @@ class HomeViewModel extends FutureViewModel {
 
   List<Post> _allposts = [];
   List<Post> get allPosts => _allposts;
-  // final _imageService = locator<ImageService>();
+
   Future logout() async {
     await _authenticationService.logout();
     _navigationService.clearStackAndShow(Routes.loginView);

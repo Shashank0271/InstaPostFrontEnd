@@ -53,6 +53,8 @@ dependencies:
   dropdown_textfield: ^1.0.8
   stacked_hooks: ^0.2.3
   liquid_pull_to_refresh: ^3.0.1
+  firebase_dynamic_links: ^5.0.17
+  share_plus: ^6.3.1
 
 dev_dependencies:
   flutter_test:
