@@ -17,6 +17,7 @@ class BlogCard extends StatelessWidget {
           model.navigateToDetailsPage(currentPost);
         },
         child: Card(
+          
           elevation: 10,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12))),
