@@ -59,7 +59,6 @@ class AuthenticationService {
   }
 
   Future<void> logout() async {
-    //we have to remove the user from disk also:
     await _firebaseAuth.signOut();
   }
 }

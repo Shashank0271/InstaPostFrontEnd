@@ -6,7 +6,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flutter/material.dart';
-import 'package:insta_post/models/Post.dart' as _i9;
+import 'package:insta_post/models/Post.dart' as _i10;
 import 'package:insta_post/ui/create-posts/createpost_view.dart' as _i7;
 import 'package:insta_post/ui/home/home_view.dart' as _i4;
 import 'package:insta_post/ui/login/login_view.dart' as _i3;
@@ -14,8 +14,9 @@ import 'package:insta_post/ui/postsdetails/postdetails_view.dart' as _i6;
 import 'package:insta_post/ui/profile/profile_view.dart' as _i8;
 import 'package:insta_post/ui/sign-up/signup_view.dart' as _i5;
 import 'package:insta_post/ui/startup/startup_view.dart' as _i2;
+import 'package:insta_post/ui/viewprofile/viewprofile_view.dart' as _i9;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i10;
+import 'package:stacked_services/stacked_services.dart' as _i11;
 
 class Routes {
   static const startupView = '/';
@@ -32,6 +33,8 @@ class Routes {
 
   static const profileView = '/profile-view';
 
+  static const viewProfileView = '/view-profile-view';
+
   static const all = <String>{
     startupView,
     loginView,
@@ -40,6 +43,7 @@ class Routes {
     postDetailsView,
     createPostView,
     profileView,
+    viewProfileView,
   };
 }
 
@@ -72,6 +76,10 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.profileView,
       page: _i8.ProfileView,
+    ),
+    _i1.RouteDef(
+      Routes.viewProfileView,
+      page: _i9.ViewProfileView,
     ),
   ];
 
@@ -119,6 +127,13 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+    _i9.ViewProfileView: (data) {
+      final args = data.getArgs<ViewProfileViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => _i9.ViewProfileView(args.userInfo),
+        settings: data,
+      );
+    },
   };
 
   @override
@@ -130,10 +145,16 @@ class StackedRouter extends _i1.RouterBase {
 class PostDetailsViewArguments {
   const PostDetailsViewArguments({required this.currentPost});
 
-  final _i9.Post currentPost;
+  final _i10.Post currentPost;
 }
 
-extension NavigatorStateExtension on _i10.NavigationService {
+class ViewProfileViewArguments {
+  const ViewProfileViewArguments({required this.userInfo});
+
+  final Map<String, dynamic> userInfo;
+}
+
+extension NavigatorStateExtension on _i11.NavigationService {
   Future<dynamic> navigateToStartupView([
     int? routerId,
     bool preventDuplicates = true,
@@ -191,7 +212,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> navigateToPostDetailsView({
-    required _i9.Post currentPost,
+    required _i10.Post currentPost,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -228,6 +249,22 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.profileView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToViewProfileView({
+    required Map<String, dynamic> userInfo,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.viewProfileView,
+        arguments: ViewProfileViewArguments(userInfo: userInfo),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -291,7 +328,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> replaceWithPostDetailsView({
-    required _i9.Post currentPost,
+    required _i10.Post currentPost,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -328,6 +365,22 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.profileView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithViewProfileView({
+    required Map<String, dynamic> userInfo,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.viewProfileView,
+        arguments: ViewProfileViewArguments(userInfo: userInfo),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

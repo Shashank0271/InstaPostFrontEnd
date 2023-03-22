@@ -110,6 +110,13 @@ class DioService {
   }
 
   Future<void> follow(
-      {required String currentUserFid, required String postUserFid}) async {}
+      {required String currentUserFid, required String followedUserFid}) async {
+    await dio.post('users/follow',
+        data: FormData.fromMap({
+          "currentUserFid": currentUserFid,
+          "followedUserFid": followedUserFid,
+        }));
+  }
+
   Future<void> getCurrentUsersPosts() async {}
 }

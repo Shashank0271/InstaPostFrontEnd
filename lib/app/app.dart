@@ -4,6 +4,7 @@ import 'package:insta_post/ui/create-posts/createpost_view.dart';
 import 'package:insta_post/ui/home/home_view.dart';
 import 'package:insta_post/ui/postsdetails/postdetails_view.dart';
 import 'package:insta_post/ui/sign-up/signup_view.dart';
+import 'package:insta_post/ui/viewprofile/viewprofile_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../services/authentication_service.dart';
@@ -22,6 +23,7 @@ import '../ui/startup/startup_view.dart';
     MaterialRoute(page: PostDetailsView),
     MaterialRoute(page: CreatePostView),
     MaterialRoute(page: ProfileView),
+    MaterialRoute(page: ViewProfileView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

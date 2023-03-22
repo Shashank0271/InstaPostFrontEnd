@@ -17,7 +17,7 @@ class ProfileInfoBar extends StatelessWidget {
         width: screenWidthPercentage(context, percentage: 0.7),
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
         decoration: const BoxDecoration(
-            color: Colors.orangeAccent,
+            color: Colors.white,
             borderRadius: BorderRadius.all(
               Radius.circular(24),
             )),

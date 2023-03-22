@@ -43,7 +43,11 @@ class PostDetailsView extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         color: Colors.grey),
-                    child: Text(currentPost.userName),
+                    child: TextButton(
+                        onPressed: () {
+                          model.viewProfile(currentPost.userFirebaseId);
+                        },
+                        child: Text(currentPost.userName)),
                   ),
                 ),
               ),
