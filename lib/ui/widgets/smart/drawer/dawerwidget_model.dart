@@ -17,6 +17,7 @@ class DrawerWidgetModel extends BaseViewModel {
   navigateToProfilePage() => _navigationService.navigateTo(Routes.profileView);
   logout() {
     _authenticationService.logout();
+    _userService.setUser = null;
     _navigationService.clearStackAndShow(Routes.loginView);
   }
 }

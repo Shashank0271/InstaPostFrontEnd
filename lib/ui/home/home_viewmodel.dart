@@ -1,7 +1,9 @@
 import 'dart:math';
 
+import 'package:insta_post/app/app.logger.dart';
 import 'package:insta_post/services/authentication_service.dart';
 import 'package:insta_post/services/dio_service.dart';
+import 'package:insta_post/services/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../app/app.router.dart';
@@ -12,7 +14,8 @@ class HomeViewModel extends FutureViewModel {
   final _authenticationService = locator<AuthenticationService>();
   final _dioService = locator<DioService>();
   final _navigationService = locator<NavigationService>();
-
+  final _logger = getLogger('HomeView-model');
+  final _userService = locator<UserService>();
   List<Post> _allposts = [];
   List<Post> get allPosts => _allposts;
 
@@ -26,6 +29,7 @@ class HomeViewModel extends FutureViewModel {
   }
 
   Future<void> refresh() async {
+    _logger.d(_userService.currentUser!.firebaseUid);
     _allposts = await _dioService.getAllPosts();
     notifyListeners();
   }

@@ -12,6 +12,10 @@ class UserService {
 
   UserModel? get currentUser => _currentUser;
 
+  set setUser(UserModel? value) {
+    _currentUser = value;
+  }
+
   final log = getLogger('UserService');
 
   Future<void> syncUserAccount() async {
@@ -45,6 +49,7 @@ class UserService {
       _currentUser = user;
 
       log.v('_currentUser has been saved');
-    } 
+    }
   }
+
 }

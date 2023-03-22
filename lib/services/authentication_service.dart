@@ -38,9 +38,10 @@ class AuthenticationService {
     }
   }
 
-  Future signUpUser(
-      {required String email,
-      required String password,}) async {
+  Future signUpUser({
+    required String email,
+    required String password,
+  }) async {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -58,6 +59,7 @@ class AuthenticationService {
   }
 
   Future<void> logout() async {
+    //we have to remove the user from disk also:
     await _firebaseAuth.signOut();
   }
 }

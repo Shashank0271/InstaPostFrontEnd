@@ -42,9 +42,8 @@ class SignupViewModel extends BaseViewModel {
           postCount: 0,
         );
 
-        await _userService.syncOrCreateUserAccount(user: userAccount);
-
-        _navigationService.clearStackAndShow(Routes.homeView);
+        await _userService.syncOrCreateUserAccount(user: userAccount).then(
+            (value) => _navigationService.clearStackAndShow(Routes.homeView));
 
         setBusy(false);
       } catch (e) {

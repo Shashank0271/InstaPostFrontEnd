@@ -14,6 +14,7 @@ class DioService {
 
   Future<void> createUser({required user}) async {
     try {
+      logger.d("entered create user method");
       var formData = FormData.fromMap(user.toMap());
       logger.i("Sending request");
       Response response = await dio.post('users', data: formData);
