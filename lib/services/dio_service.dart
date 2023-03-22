@@ -132,4 +132,37 @@ class DioService {
       rethrow;
     }
   }
+
+  Future<void> updatePost({
+    required String postId,
+    XFile? postImage,
+    String? title,
+    String? body,
+    String? category,
+  }) async {
+    final Map<String, dynamic> requestBody = {};
+    if (postImage != null) {
+      requestBody["photo"] = await MultipartFile.fromFile(postImage.path);
+    }
+    if (title != null) {
+      requestBody["title"] = title;
+    }
+    if (body != null) {
+      requestBody["body"] = body;
+    }
+    if (category != null) {
+      requestBody["category"] = category;
+    }
+    final formData = FormData.fromMap(requestBody);
+    logger.d(requestBody);
+    await dio.patch('posts/$postId', data: formData);
+  }
+
+  Future<void> likePost({required String postId}) async {
+    await dio.post('posts/like/$postId');
+  }
+  
+  Future<void> unlikePost({required String postId}) async {
+    await dio.post('posts/unlike/$postId');
+  }
 }

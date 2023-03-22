@@ -4,12 +4,16 @@ import 'package:image_picker/image_picker.dart';
 import 'package:insta_post/models/Post.dart';
 import 'package:insta_post/services/image_service.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
+import '../../services/dio_service.dart';
 
 class EditPostViewModel extends BaseViewModel {
   final _imageService = locator<ImageService>();
-
+  final _dioService = locator<DioService>();
+  final _snackbarService = locator<SnackbarService>();
+  final _navigationService = locator<NavigationService>();
   XFile? selectedFile;
   String? selectedCategory;
   SingleValueDropDownController singleValueDropDownController =
@@ -29,7 +33,24 @@ class EditPostViewModel extends BaseViewModel {
   ];
 
   final _logger = getLogger('EditPostViewModel');
-  void updatePost({String? name}) {}
+
+  Future<void> updatePost({required String postId}) async {
+    setBusy(true);
+    await _dioService
+        .updatePost(
+      postId: postId,
+      postImage: selectedFile,
+      title: titleController.text.trim().toString(),
+      body: bodyController.text.trim().toString(),
+      category: selectedCategory,
+    )
+        .then((value) {
+      _logger.v('post with id = $postId updated');
+      _snackbarService.showSnackbar(message: 'post updated successfully');
+      _navigationService.popRepeated(1);
+    });
+    setBusy(false);
+  }
 
   Future takePicture() async {
     selectedFile = await _imageService.takePicture();

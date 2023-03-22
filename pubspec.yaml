@@ -55,6 +55,7 @@ dependencies:
   liquid_pull_to_refresh: ^3.0.1
   firebase_dynamic_links: ^5.0.17
   share_plus: ^6.3.1
+  font_awesome_flutter: ^10.4.0
 
 dev_dependencies:
   flutter_test:

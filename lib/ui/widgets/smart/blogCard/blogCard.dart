@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../models/Post.dart';
 import '../../../shared/ui_helper.dart';
 import 'blogCardmodel.dart';
 
 class BlogCard extends StatelessWidget {
   final Post currentPost;
-  const BlogCard(this.currentPost);
+  final bool canLike;
+  const BlogCard(this.currentPost, {super.key, this.canLike = true});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,6 @@ class BlogCard extends StatelessWidget {
           model.navigateToDetailsPage(currentPost);
         },
         child: Card(
-          
           elevation: 10,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12))),
@@ -51,11 +51,26 @@ class BlogCard extends StatelessWidget {
                       Text(currentPost.userName),
                     ],
                   ),
-                  IconButton(
-                      onPressed: () {
-                        model.sharePost(currentPost.id);
-                      },
-                      icon: const Icon(Icons.share))
+                  Row(
+                    children: [
+                      if (canLike)
+                        IconButton(
+                            onPressed: () {
+                              model.toggleLikes(postId: currentPost.id);
+                            },
+                            icon: model.liked
+                                ? const Icon(
+                                    FontAwesomeIcons.solidHeart,
+                                    color: Colors.red,
+                                  )
+                                : const Icon(FontAwesomeIcons.heart)),
+                      IconButton(
+                          onPressed: () {
+                            model.sharePost(currentPost.id);
+                          },
+                          icon: const Icon(Icons.share)),
+                    ],
+                  )
                 ],
               )
             ]),

@@ -16,7 +16,9 @@ class EditPostView extends StatelessWidget {
       builder: (context, model, child) => SafeArea(
         child: Scaffold(
           floatingActionButton: FloatingActionButton(
-            onPressed: model.updatePost,
+            onPressed: () {
+              model.updatePost(postId: post.id); 
+            },
             child: model.isBusy
                 ? const Center(
                     child: CircularProgressIndicator(color: Colors.black))
