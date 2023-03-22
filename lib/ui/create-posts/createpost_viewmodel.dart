@@ -47,6 +47,7 @@ class CreatePostViewModel extends BaseViewModel {
       _snackbarService.showSnackbar(message: 'please enter all details');
       return;
     }
+    _logger.d(_userService.currentUser!.username);
 
     setBusy(true);
     try {
@@ -57,6 +58,8 @@ class CreatePostViewModel extends BaseViewModel {
           category: selectedCategory!,
           userFirebaseId: _authenticationService.firebaseUser!.uid,
           userName: _userService.currentUser!.username);
+
+      _navigationService.clearStackAndShow(Routes.homeView);
 
       _snackbarService.showSnackbar(
         message: 'post added successfully !',
@@ -69,6 +72,7 @@ class CreatePostViewModel extends BaseViewModel {
       setBusy(false);
     } catch (e) {
       _snackbarService.showSnackbar(message: e.toString());
+      _logger.e(e.toString());
       setBusy(false);
     }
   }

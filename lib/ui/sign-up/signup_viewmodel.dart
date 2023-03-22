@@ -16,10 +16,6 @@ class SignupViewModel extends BaseViewModel {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  Future<void> logout() async {
-    await _authenticationService.logout();
-  }
-
   Future<void> createAccount() async {
     final email = emailController.text.trim().toString();
     final password = passwordController.text.trim().toString();
@@ -34,18 +30,22 @@ class SignupViewModel extends BaseViewModel {
           email: email,
           password: password,
         );
+
         final userAccount = UserModel(
           username: userName,
           email: email,
           firebaseUid: _authenticationService.firebaseUser!.uid,
-          registrationToken: '',
+          registrationToken: ' ',
           followersTokens: [],
           followers: [],
           following: [],
-          postIds: [],
+          postCount: 0,
         );
+
         await _userService.syncOrCreateUserAccount(user: userAccount);
+
         _navigationService.clearStackAndShow(Routes.homeView);
+
         setBusy(false);
       } catch (e) {
         setBusy(false);

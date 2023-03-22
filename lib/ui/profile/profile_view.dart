@@ -13,21 +13,31 @@ class ProfileView extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(title: const Text('Profile')),
         body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ProfileInfoBar(
-                    data: 'username : ${model.currentUser.username}'),
-                verticalSpaceMedium,
-                ProfileInfoBar(data: 'email : ${model.currentUser.email}'),
-                verticalSpaceMedium,
-                ProfileInfoBar(
-                    data: 'followers : ${model.currentUser.followers.length}'),
-                verticalSpaceMedium,
-                ProfileInfoBar(
-                    data: 'following : ${model.currentUser.following.length}'),
-              ]),
+          child: model.isBusy
+              ? const CircularProgressIndicator(
+                  color: Colors.black,
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                      ProfileInfoBar(
+                          data: 'username : ${model.currentUser.username}'),
+                      verticalSpaceMedium,
+                      ProfileInfoBar(
+                          data: 'email : ${model.currentUser.email}'),
+                      verticalSpaceMedium,
+                      ProfileInfoBar(
+                          data:
+                              'followers : ${model.currentUser.followers.length}'),
+                      verticalSpaceMedium,
+                      ProfileInfoBar(
+                          data:
+                              'following : ${model.currentUser.following.length}'),
+                      verticalSpaceMedium,
+                      ProfileInfoBar(
+                          data: 'my posts : ${model.currentUser.postCount}'),
+                    ]),
         ),
       ),
       viewModelBuilder: () => ProfileViewModel(),

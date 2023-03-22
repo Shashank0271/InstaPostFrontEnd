@@ -15,5 +15,8 @@ class DrawerWidgetModel extends BaseViewModel {
   String get accountEmail => _userService.currentUser!.email;
   navigateToHomePage() => _navigationService.clearStackAndShow(Routes.homeView);
   navigateToProfilePage() => _navigationService.navigateTo(Routes.profileView);
-  logout() => _authenticationService.logout();
+  logout() {
+    _authenticationService.logout();
+    _navigationService.clearStackAndShow(Routes.loginView);
+  }
 }

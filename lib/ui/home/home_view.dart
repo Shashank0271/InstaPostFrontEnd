@@ -20,12 +20,12 @@ class HomeView extends StatelessWidget {
               onRefresh: model.refresh,
               child: SafeArea(
                 child: Scaffold(
-                    drawer: DrawerWidget(),
+                    drawer: const DrawerWidget(),
                     floatingActionButton: FloatingActionButton(
                         onPressed: model.navigateToCreatePostScreen,
                         child: const Icon(Icons.create)),
                     appBar: AppBar(
-                      title: Text('Home'),
+                      title: const Text('Home'),
                     ),
                     body: Padding(
                       padding: const EdgeInsets.symmetric(

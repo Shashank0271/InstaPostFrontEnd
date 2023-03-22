@@ -4,7 +4,12 @@ import 'package:stacked/stacked.dart';
 
 import '../../app/app.locator.dart';
 
-class ProfileViewModel extends BaseViewModel {
+class ProfileViewModel extends FutureViewModel {
   final _userService = locator<UserService>();
   UserModel get currentUser => _userService.currentUser!;
+
+  @override
+  Future futureToRun() async {
+    await _userService.syncUserAccount();
+  }
 }

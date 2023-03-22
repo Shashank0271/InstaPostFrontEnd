@@ -1,14 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-
 class UserModel {
   final String username;
   final String email;
   String firebaseUid;
   final String registrationToken;
-  final List<String> postIds;
+  final int postCount;
   final List<String> followersTokens;
   final List<String> followers;
   final List<String> following;
@@ -17,7 +14,7 @@ class UserModel {
     required this.email,
     required this.firebaseUid,
     required this.registrationToken,
-    required this.postIds,
+    required this.postCount,
     required this.followersTokens,
     required this.followers,
     required this.following,
@@ -28,7 +25,7 @@ class UserModel {
     String? email,
     String? firebaseUid,
     String? registrationToken,
-    List<String>? postIds,
+    int? postCount,
     List<String>? followersTokens,
     List<String>? followers,
     List<String>? following,
@@ -38,7 +35,7 @@ class UserModel {
       email: email ?? this.email,
       firebaseUid: firebaseUid ?? this.firebaseUid,
       registrationToken: registrationToken ?? this.registrationToken,
-      postIds: postIds ?? this.postIds,
+      postCount: postCount ?? this.postCount,
       followersTokens: followersTokens ?? this.followersTokens,
       followers: followers ?? this.followers,
       following: following ?? this.following,
@@ -51,7 +48,7 @@ class UserModel {
       'email': email,
       'firebaseUid': firebaseUid,
       'registrationToken': registrationToken,
-      'postIds': postIds,
+      'postCount': postCount,
       'followersTokens': followersTokens,
       'followers': followers,
       'following': following,
@@ -64,7 +61,7 @@ class UserModel {
       email: map['email'] as String,
       firebaseUid: map['firebaseUid'] as String,
       registrationToken: map['registrationToken'] as String,
-      postIds: (map['postIds'] as List).map((e) => e as String).toList(),
+      postCount: map['postCount'] ,
       followersTokens:
           (map['followersTokens'] as List).map((e) => e as String).toList(),
       following: (map['following'] as List).map((e) => e as String).toList(),
@@ -79,20 +76,6 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(username: $username, email: $email, firebaseUid: $firebaseUid, registrationToken: $registrationToken, postIds: $postIds, followersTokens: $followersTokens, followers: $followers, following: $following)';
-  }
-
-  @override
-  bool operator ==(covariant UserModel other) {
-    if (identical(this, other)) return true;
-
-    return other.username == username &&
-        other.email == email &&
-        other.firebaseUid == firebaseUid &&
-        other.registrationToken == registrationToken &&
-        listEquals(other.postIds, postIds) &&
-        listEquals(other.followersTokens, followersTokens) &&
-        listEquals(other.followers, followers) &&
-        listEquals(other.following, following);
-  }
+    return 'UserModel(username: $username, email: $email, firebaseUid: $firebaseUid, registrationToken: $registrationToken, postCount: $postCount, followersTokens: $followersTokens, followers: $followers, following: $following)';
+  } 
 }
