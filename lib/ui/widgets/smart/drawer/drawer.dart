@@ -26,6 +26,11 @@ class DrawerWidget extends StatelessWidget {
               onTap: model.navigateToProfilePage,
             ),
             ListTile(
+              title: const Text('My Posts'),
+              leading: const Icon(Icons.notes),
+              onTap: model.navigateToMyPostsView,
+            ),
+            ListTile(
               title: const Text('Logout'),
               leading: const Icon(Icons.logout),
               onTap: model.logout,

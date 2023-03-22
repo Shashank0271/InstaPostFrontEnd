@@ -1,6 +1,7 @@
 import 'package:insta_post/services/dio_service.dart';
 import 'package:insta_post/services/image_service.dart';
 import 'package:insta_post/ui/create-posts/createpost_view.dart';
+import 'package:insta_post/ui/editposts/editpost_view.dart';
 import 'package:insta_post/ui/home/home_view.dart';
 import 'package:insta_post/ui/postsdetails/postdetails_view.dart';
 import 'package:insta_post/ui/sign-up/signup_view.dart';
@@ -11,6 +12,7 @@ import '../services/authentication_service.dart';
 import '../services/dynamic_link_service.dart';
 import '../services/user_service.dart';
 import '../ui/login/login_view.dart';
+import '../ui/myposts/myposts_view.dart';
 import '../ui/profile/profile_view.dart';
 import '../ui/startup/startup_view.dart';
 
@@ -24,6 +26,8 @@ import '../ui/startup/startup_view.dart';
     MaterialRoute(page: CreatePostView),
     MaterialRoute(page: ProfileView),
     MaterialRoute(page: ViewProfileView),
+    MaterialRoute(page: MyPostsView),
+    MaterialRoute(page: EditPostView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

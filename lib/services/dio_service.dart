@@ -95,7 +95,6 @@ class DioService {
   Future<List<Post>> getAllPosts() async {
     try {
       final Response response = await dio.get('posts');
-      logger.v("fetched all posts : ${response.data}");
       List<Post> allPosts =
           (response.data as List).map((e) => Post.fromMap(e)).toList();
       return allPosts;
@@ -118,5 +117,19 @@ class DioService {
         }));
   }
 
-  Future<void> getCurrentUsersPosts() async {}
+  Future<List<Post>> getCurrentUsersPosts({required String firebaseUid}) async {
+    try {
+      final Response response = await dio.get('posts/$firebaseUid');
+      List<Post> myPosts =
+          (response.data as List).map((e) => Post.fromMap(e)).toList();
+      return myPosts;
+    } on DioError catch (e) {
+      logger.e(e.response);
+      logger.e(e.message);
+      rethrow;
+    } catch (e) {
+      logger.e(e.toString());
+      rethrow;
+    }
+  }
 }
