@@ -18,27 +18,25 @@ class HomeView extends StatelessWidget {
             )
           : LiquidPullToRefresh(
               onRefresh: model.refresh,
-              child: SafeArea(
-                child: Scaffold(
-                    drawer: const DrawerWidget(),
-                    floatingActionButton: FloatingActionButton(
-                        onPressed: model.navigateToCreatePostScreen,
-                        child: const Icon(Icons.create)),
-                    appBar: AppBar(
-                      title: const Text('Home'),
-                    ),
-                    body: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 24.0, horizontal: 16),
-                      child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: model.allPosts.length,
-                          itemBuilder: ((context, index) {
-                            Post currentPost = model.allPosts[index];
-                            return BlogCard(currentPost);
-                          })),
-                    )),
-              ),
+              child: Scaffold(
+                  drawer: const DrawerWidget(),
+                  floatingActionButton: FloatingActionButton(
+                      onPressed: model.navigateToCreatePostScreen,
+                      child: const Icon(Icons.create)),
+                  appBar: AppBar(
+                    title: const Text('Home'),
+                  ),
+                  body: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 24.0, horizontal: 16),
+                    child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: model.allPosts.length,
+                        itemBuilder: ((context, index) {
+                          Post currentPost = model.allPosts[index];
+                          return BlogCard(currentPost);
+                        })),
+                  )),
             ),
       viewModelBuilder: () => HomeViewModel(),
     );

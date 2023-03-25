@@ -9,7 +9,7 @@ class DioService {
   Dio dio = Dio();
   final logger = getLogger('DioService');
   DioService() {
-    dio.options.baseUrl = 'http://10.20.25.222:4000/api/v1/';
+    dio.options.baseUrl = 'http://10.20.27.3:4000/api/v1/';
   }
 
   Future<void> createUser({required user}) async {
@@ -109,11 +109,14 @@ class DioService {
   }
 
   Future<void> follow(
-      {required String currentUserFid, required String followedUserFid}) async {
+      {required String currentUserFid,
+      required String followedUserFid,
+      required String currentUserToken}) async {
     await dio.post('users/follow',
         data: FormData.fromMap({
           "currentUserFid": currentUserFid,
           "followedUserFid": followedUserFid,
+          "currentUserToken": currentUserToken,
         }));
   }
 
@@ -161,7 +164,7 @@ class DioService {
   Future<void> likePost({required String postId}) async {
     await dio.post('posts/like/$postId');
   }
-  
+
   Future<void> unlikePost({required String postId}) async {
     await dio.post('posts/unlike/$postId');
   }

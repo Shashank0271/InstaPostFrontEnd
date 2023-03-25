@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
 class UserModel {
   final String username;
   final String email;
   String firebaseUid;
-  final String registrationToken;
+  String registrationToken;
   final int postCount;
   final List<String> followersTokens;
   final List<String> followers;
@@ -61,7 +62,7 @@ class UserModel {
       email: map['email'] as String,
       firebaseUid: map['firebaseUid'] as String,
       registrationToken: map['registrationToken'] as String,
-      postCount: map['postCount'] ,
+      postCount: map['postCount'],
       followersTokens:
           (map['followersTokens'] as List).map((e) => e as String).toList(),
       following: (map['following'] as List).map((e) => e as String).toList(),
@@ -77,5 +78,5 @@ class UserModel {
   @override
   String toString() {
     return 'UserModel(username: $username, email: $email, firebaseUid: $firebaseUid, registrationToken: $registrationToken, postCount: $postCount, followersTokens: $followersTokens, followers: $followers, following: $following)';
-  } 
+  }
 }

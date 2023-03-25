@@ -9,7 +9,6 @@ import 'package:insta_post/ui/shared/setup_snackbar_ui.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void main() async {
-  //TODO : add fcm to app code (1)
   //TODO : add fcm to create post api (2)
   //TODO : make following section in drawer (3),
   //TODO : in the following page , add option to unfollow (4)

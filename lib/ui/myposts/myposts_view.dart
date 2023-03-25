@@ -32,7 +32,10 @@ class MyPostsView extends StatelessWidget {
                         itemBuilder: ((context, index) {
                           Post currentPost = model.myPostList[index];
                           return Stack(children: [
-                            BlogCard(currentPost,canLike: false,),
+                            BlogCard(
+                              currentPost,
+                              canLike: false,
+                            ),
                             Positioned(
                                 right: 10,
                                 top: 10,
@@ -41,7 +44,7 @@ class MyPostsView extends StatelessWidget {
                                     model.navigateToEditPostScreen(
                                         selectedPost: currentPost);
                                   },
-                                  child: CircleAvatar(
+                                  child: const CircleAvatar(
                                     backgroundColor: Colors.deepOrange,
                                     child: Icon(Icons.edit),
                                   ),

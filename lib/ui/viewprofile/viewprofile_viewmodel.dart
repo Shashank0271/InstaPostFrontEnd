@@ -2,7 +2,7 @@ import 'package:insta_post/services/dio_service.dart';
 import 'package:insta_post/services/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-
+import '../../services/pushnotification_service.dart' as FCMService;
 import '../../app/app.locator.dart';
 
 class ViewProfileViewModel extends BaseViewModel {
@@ -16,7 +16,9 @@ class ViewProfileViewModel extends BaseViewModel {
       return;
     }
     await _dioService.follow(
-        currentUserFid: currentUserFid, followedUserFid: followedUserFid);
+        currentUserFid: currentUserFid,
+        followedUserFid: followedUserFid,
+        currentUserToken: FCMService.myFcmToken!);
     _snackbarService.showSnackbar(message: 'you are now following $userName');
   }
 }

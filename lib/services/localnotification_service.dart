@@ -1,7 +1,9 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:insta_post/app/app.logger.dart';
 
 class LocalNotificationService {
+  static final _logger = getLogger("LocalNotificationService");
   static final FlutterLocalNotificationsPlugin _notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
@@ -37,7 +39,7 @@ class LocalNotificationService {
         // payload: message.data['_id'],
       );
     } on Exception catch (e) {
-      print(e);
+      _logger.e(e.toString());
     }
   }
 }
