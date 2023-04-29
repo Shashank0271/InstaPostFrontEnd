@@ -9,7 +9,7 @@ class DioService {
   Dio dio = Dio();
   final logger = getLogger('DioService');
   DioService() {
-    dio.options.baseUrl = 'http://10.20.27.3:4000/api/v1/';
+    dio.options.baseUrl = 'http://10.20.61.122:8000/api/v1/';
   }
 
   Future<void> createUser({required user}) async {
@@ -161,11 +161,13 @@ class DioService {
     await dio.patch('posts/$postId', data: formData);
   }
 
-  Future<void> likePost({required String postId}) async {
-    await dio.post('posts/like/$postId');
+  Future<void> likePost(
+      {required String postId, required String firebaseUid}) async {
+    await dio.post('posts/like/$postId/$firebaseUid');
   }
 
-  Future<void> unlikePost({required String postId}) async {
-    await dio.post('posts/unlike/$postId');
+  Future<void> unlikePost(
+      {required String postId, required String firebaseUid}) async {
+    await dio.post('posts/unlike/$postId/$firebaseUid');
   }
 }

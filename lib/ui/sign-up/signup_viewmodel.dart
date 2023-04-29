@@ -39,6 +39,7 @@ class SignupViewModel extends BaseViewModel {
           followersTokens: [],
           followers: [],
           following: [],
+          likedPosts: [],
           postCount: 0,
         );
 

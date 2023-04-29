@@ -8,7 +8,6 @@ import 'createpost_viewmodel.dart';
 
 class CreatePostView extends StatelessWidget {
   const CreatePostView({Key? key}) : super(key: key);
-//TODO : complete adding posts functionality
 
   @override
   Widget build(BuildContext context) {
