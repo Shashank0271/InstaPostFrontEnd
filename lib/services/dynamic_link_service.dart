@@ -13,6 +13,7 @@ class DynamicLinkService {
 
   //when we create a post link for currentUser to share :
   Future<String> createPostLink({required String postID}) async {
+    //The link parameter represents the URL or deep link where the dynamic link will redirect the user when clicked.
     final String url = 'https://www.instapost.com/post?pid=$postID';
 
     final DynamicLinkParameters parameters = DynamicLinkParameters(
@@ -25,7 +26,7 @@ class DynamicLinkService {
 
     final firebaseDynamicLinks = FirebaseDynamicLinks.instance;
     final refLink = await firebaseDynamicLinks.buildShortLink(parameters);
-
+    _logger.i(refLink.shortUrl);
     return refLink.shortUrl.toString();
   }
 
@@ -61,5 +62,4 @@ class DynamicLinkService {
       }
     }
   }
-
 }

@@ -13,6 +13,9 @@ class BlogCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<BlogCardModel>.reactive(
+      onViewModelReady: (model) {
+        model.init(canLike);
+      },
       builder: (context, model, child) => GestureDetector(
         onTap: () {
           model.navigateToDetailsPage(currentPost);
@@ -53,7 +56,6 @@ class BlogCard extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      if (canLike)
                         IconButton(
                             onPressed: () {
                               model.toggleLikes(postId: currentPost.id);

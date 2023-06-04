@@ -9,7 +9,7 @@ class DioService {
   Dio dio = Dio();
   final logger = getLogger('DioService');
   DioService() {
-    dio.options.baseUrl = 'http://10.20.61.122:8000/api/v1/';
+    dio.options.baseUrl = 'http://192.168.29.94:8000/api/v1/';
   }
 
   Future<void> createUser({required user}) async {

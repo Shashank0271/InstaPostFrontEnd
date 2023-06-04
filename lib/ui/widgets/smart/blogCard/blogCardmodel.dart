@@ -38,4 +38,9 @@ class BlogCardModel extends BaseViewModel {
           firebaseUid: _authenticationService.firebaseUser!.uid);
     }
   }
+
+  init(bool canLike) {
+    print(canLike);
+    liked = !canLike;
+  }
 }

@@ -34,7 +34,14 @@ class HomeView extends StatelessWidget {
                         itemCount: model.allPosts.length,
                         itemBuilder: ((context, index) {
                           Post currentPost = model.allPosts[index];
-                          return BlogCard(currentPost);
+                          if (model.likedList.contains(currentPost.id)) {
+                            return BlogCard(
+                              currentPost,
+                              canLike: false,
+                            );
+                          } else {
+                            return BlogCard(currentPost);
+                          }
                         })),
                   )),
             ),
